@@ -1,1 +1,1 @@
-Git is a version control system for my Rss_Blog project
+It`s a readme.txt for my Rss_Blog project
