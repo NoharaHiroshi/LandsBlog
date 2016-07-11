@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load comments %}
+		{% block page-content %}
+		<!-- 左侧栏 -->
+		<div class="container">
+		
+		
+		<div class="content">
+			<div class="col-md-9 content-left">
+				<div class="editors-pic-grids-artical">
+					<h5>{{ tag_name.label }}</h5>
+					
+				{% for artical in artical_tag_list %}
+					<div class="editors-pic-artical">
+						<div class="e-pic-artical">
+							<a href="{{ artical.get_absolute_url }}"><img src={{ artical.img.url }} alt={{ artical.title }}></a>
+						</div>
+						<div class="e-pic-info-artical">
+							<a href="{{ artical.get_absolute_url }}">{{ artical.title }}</a>
+							<label class="category">{{ artical.category }}</label>
+							<label>{{ artical.modified|date:"m-d h:i"}}</label>
+							<label>阅读 ( {{ artical.read_times }} )</label>
+							{% get_comment_count for artical as artical_count %}
+							<label>评论 ({{artical_count}})</label>
+							<p>{{ artical.summary|truncatechars:80}}</p>
+						</div>
+					<div class="clearfix"></div>
+					</div>
+				{% endfor %}
+				
+				
+				
+					<div class="pag-nations">
+						<ul class="p_n-list">
+						{% if artical_tag_list.has_previous %}
+							<li><a href="/tag/{{ tag_name.slug }}/{{ artical_tag_list.previous_page_number }}" class="prev"></a></li>
+						{% else %}
+							<li><a href="" class="prev"></a></li>
+						{% endif %}
+						
+						{%for page_number in artical_tag_list.paginator.page_range %}
+							{% if page_number = artical_tag_list.number %}
+								<li class="active"><a href="">{{ page_number }}</a></li>
+							{% else %}
+								<li><a href="/tag/{{ tag_name.slug }}/{{ page_number }}">{{ page_number }}</a></li>
+							{% endif %}
+						{% endfor %}
+						
+						{% if artical_tag_list.has_next %}
+							<li><a href="/tag/{{ tag_name.slug }}/{{ artical_tag_list.next_page_number }}" class="next"></a></li>
+						{% else %}
+							<li><a href="" class="next"></a></li>
+						{% endif %}
+						</ul>
+					</div>
+					
+					
+				</div>
+			</div>
+		<!-- /左侧栏 -->
+			
+			
+		<!-- 右侧栏 -->
+		<div class="col-md-3 content-right">
+			<h5 class="head">热文</h5>	
+			<div class="re-editors-pic-grids">			
+			{% for popular in popular_list %}
+				<div class="re-editors-pic">
+					<div class="re-pic">
+						<a href="{{ popular.get_absolute_url}}"><img src={{ popular.img.url }} alt={{ popular.title }}></a>
+					</div>
+					<div class="re-pic-info">
+						<a class="artical-list-a" href="{{ popular.get_absolute_url}}">{{ popular.title }}</a>
+						<p class="artical-list-p">{{ popular.category }}  {{ popular.modified|date:"m-d h:i"}}</p>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				{% endfor %}
+			</div>	
+		</div>
+		<!-- 右侧栏 -->
+				
+	
+		<div class="clearfix"></div>	
+		</div>
+		</div>
+		{% endblock %}

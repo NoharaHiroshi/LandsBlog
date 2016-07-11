@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load custom_markdown %}
+{% load comments %}
+		{% block page-content %}
+		<!-- 左侧栏 -->
+		<div class="container">
+		
+		
+		<div class="content">
+			<div class="col-md-9 content-left">
+				<article class="post post-1">
+							<header class="entry-header">
+								<i class="line"> </i>
+								<h1 class="entry-title">
+									<p>{{ artical.title }}</p>
+								</h1>
+								<i class="line"> </i>
+								<div class="entry-meta">
+									<span class="post-category"><a href="/artical/{{ artical.category.slug }}">{{ artical.category }}</a></span>
+			
+									<span class="post-date"><a href="#"><time class="entry-date" datetime="2012-11-09T23:15:57+00:00">{{ artical.modified|date:"m-d h:i" }}</time></a></span>
+			
+									<span class="post-author"><a href="#">{{ artical.owner }}</a></span>
+									
+									<span class="read-times"><a>阅读 ({{ artical.read_times }})</a></span>
+									{% get_comment_count for artical as artical_count %}
+									<span class="comments-link"><a href="#">评论 ({{artical_count}})</a></span>
+								</div>
+								<div class="entry-tag">
+								{% for tag in artical.tags.select_related %}
+									<a href="/tag/{{ tag.slug }}">{{ tag.label }}</a>
+								{% endfor %}
+								</div>
+							</header>
+							<div class="entry-content clearfix">
+								<p>{{ artical.html_content|custom_markdown|removetags:"a span div"}}</p>
+							</div>
+				</article>	
+				<hr/>
+				
+				
+				<div class="col-md-12 content-left">
+						<h1 class="page-title">Comments</h1>
+				<article class="sub_comment">
+						<div class="entry-content clearfix">
+							<form action="/comment/" method="post" class="contact-form">
+									<div class="row">
+										<div class="col-md-9 content-left">
+											<input type="hidden" name="artical_id" value="{{artical.id}}" />
+											<input type="hidden" name="artical_slug" value="{{artical.slug}}" />
+											<input type="text" name="artical_name" placeholder="Name" required="">
+											<textarea name="comment_content" rows="7" placeholder="Your Comment" required=""></textarea>
+											<button class="btn-send btn-5 btn-5b ion-ios-paperplane"><span>Submit</span></button>
+										</div>
+									</div>	<!-- row -->
+							</form>
+						</div>
+				</article>
+				</div>
+				
+				<div class="col-md-12 content-left">
+				<h1 class="page-title">Recent Comments</h1>
+				<div class="comment-editor">
+				{% get_comment_list for artical as artical_comment_list %}
+				{% for comment in artical_comment_list %}
+				<img src="/upload/user/default_user.jpg">
+					<h5>
+					<strong>{{ comment.name }}</strong>{{ comment.submit_date|timesince }} ago
+					</h5>
+						<p>{{ comment.comment }}<p>
+					<hr>
+				{%endfor %}
+				</div>
+				</div>
+			</div>
+		<!-- /左侧栏 -->
+			
+			
+		<!-- 右侧栏 -->
+		<div class="col-md-3 content-right">
+			<h5 class="head">热文</h5>	
+			<div class="re-editors-pic-grids">			
+			{% for popular in popular_list %}
+				<div class="re-editors-pic">
+					<div class="re-pic">
+						<a href={{ popular.get_absolute_url }}><img src={{ popular.img.url }} alt={{ popular.title }}></a>
+					</div>
+					<div class="re-pic-info">
+						<a class="artical-list-a" href={{ popular.get_absolute_url }}>{{ popular.title }}</a>
+						<p class="artical-list-p">{{ popular.category }}  {{ popular.modified|date:"m-d h:i"}}</p>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				{% endfor %}
+			</div>	
+			<h5 class="title-head">排行榜</h5>	
+			<div class="ranking-list">
+				<ul>
+				{% for artical in ranking_list %}
+					<li>
+						<i class="rank-{{ forloop.counter }}">{{ forloop.counter }}</i>
+						<a href="{{ artical.get_absolute_url }}">{{ artical.title }}</a>
+					</li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<!-- 右侧栏 -->
+				
+	
+		<div class="clearfix"></div>	
+		</div>
+		</div>
+		{% endblock %}

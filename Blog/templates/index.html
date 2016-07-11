@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% load comments %}
+		{% block page-content %}
+		<!-- Slider -->
+		<div class="container">
+		<div class="content">
+		
+        <div id="main-slider" class="flexslider">
+            <ul class="slides">
+			  {% for carousel in carousel_list %}
+			  <li>
+			  <a class="slides" href={{ carousel.blog.get_absolute_url }}>
+				<img src={{ carousel.img.url }} alt={{ carousel.title }} />
+				<div class="flex-caption">
+					<h3>{{ carousel.title }}</h3>
+					<p>{{ carousel.summary }}</p>
+				</div>
+				</a>
+			  </li>
+			  {% endfor %}
+            </ul>
+        </div>
+        <!-- /Slider -->
+		
+			<div class="col-md-7 content-left">
+			
+			<h5 class="head">每日热点</h5>
+				
+				{% for daily in daily_list %}
+				<div class="article">
+					<i class="line"> </i>
+					<a class="title" href={{ daily.get_absolute_url }}>{{ daily.title }}</a>
+					<i class="line"> </i>
+					<div class="entry-meta">
+									<span class="post-category"><a href="artical/{{ daily.category.slug }}">{{ daily.category }}</a></span>
+			
+									<span class="post-date"><a><time class="entry-date" datetime="2012-11-09T23:15:57+00:00">{{ daily.created|date:"m-d h:i" }}</time></a></span>
+			
+									<span class="post-author"><a href="#">{{ daily.owner }}</a></span>
+									
+									<span class="read-times"><a>阅读 ({{ daily.read_times }})</a></span>
+									{% get_comment_count for daily as daily_count %}
+									<span class="comments-link"><a>评论 ({{ daily_count }})</a></span>
+					</div>
+					<div class="entry-content">
+					<a href={{ daily.get_absolute_url }}><img src={{ daily.img.url }} alt={{ daily.title }} class="img-responsive center-block"></a>
+					<p>
+					{{ daily.summary }}
+					</p>
+					</div>
+					<div class="read-more cl-effect-14">
+							<a href={{ daily.get_absolute_url }} class="more-link">Continue reading <span class="meta-nav">&gt;</span></a>
+					</div>
+				</div>
+				{% endfor %}
+				
+			
+				
+			</div>
+			
+			
+			<div class="col-md-5 content-right">
+			<div class="content-right-top">
+				<h5 class="head">订阅内容</h5>
+				{% for rss in rss_list %}
+				<a href={{ rss.get_absolute_url }}>
+					<div class="editor text-center">
+						<h3>{{ rss.title }}</h3>
+						<p>{{ rss.category }}  {{ rss.created|date:"m-d h:i"}}</p>
+						<label>{{ rss.created|timesince }} ago</label>
+					</div>
+				</a>
+				{% endfor %}
+				</div>
+				
+				<div class="read-more cl-effect-14">
+					<a href="/status/rss" class="more-link">More Artical <span class="meta-nav">&gt;</span></a>
+				</div>
+				<div class="editors-pic-grids">
+					<h5>每日热评</h5>
+					
+				{% for daily_comment in daily_comment_list %}
+					<div class="editors-pic">
+						<div class="e-pic">
+							<a href={{ daily_comment.get_absolute_url }}><img src={{ daily_comment.img.url }} alt={{ daily_comment.title }}></a>
+						</div>
+						<div class="e-pic-info">
+							<a href={{ daily_comment.get_absolute_url }}>{{ daily_comment.title }}</a>
+							<a class="e-pic-info-category" href="artical/{{ daily_comment.category.slug }}">{{ daily_comment.category }}</a> 
+							<label>{{ daily_comment.created|date:"m-d h:i"}}</label>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				{% endfor %}
+										
+					
+					<div class="read-more cl-effect-14">
+						<a href="/status/daily_comment" class="more-link">More Artical <span class="meta-nav">&gt;</span></a>
+					</div>
+				</div>
+			</div>
+			
+		<!-- 热点新闻 -->	
+			{% for hotspot in hotspot %}
+			<div class="features banner-grid">
+			<a href="{{ hotspot.blog.get_absolute_url }}">
+				   <figure class="effect-bubba">
+						<img src={{ hotspot.img.url }} alt="{{ hotspot.title }}">
+						<figcaption>
+							<h4>{{ hotspot.title }}</h4>
+							<p>{{ hotspot.summary }}</p>
+							<p>
+							Read more >
+							</p>
+						</figcaption>			
+					</figure>
+			</a>
+			</div>
+			{% endfor %}
+			
+
+		<!-- /热点新闻 -->
+			
+			
+		<!-- 业界动态 -->	
+		<div class="col-md-7 content-left">
+			<h5 class="head">业界动态</h5>
+			{% for industry_news in industry_news_list %}
+				<div class="article">
+					<i class="line"> </i>
+					<a class="title" href={{ industry_news.get_absolute_url }}>{{ industry_news.title }}</a>
+					<i class="line"> </i>
+					<div class="entry-meta">
+									<span class="post-category"><a href="#">{{ industry_news.category }}</a></span>
+			
+									<span class="post-date"><a href="#"><time class="entry-date" >{{ industry_news.created|date:"m-d h:i" }}</time></a></span>
+			
+									<span class="post-author"><a href="#">{{ industry_news.owner }}</a></span>
+									
+									<span class="read-times"><a href="#">阅读 ({{ industry_news.read_times }})</a></span>
+									{% get_comment_count for industry_news as industry_news_count %}
+									<span class="comments-link"><a href="#">评论 ({{ industry_news_count }})</a></span>
+					</div>
+					<a href={{ industry_news.get_absolute_url }}><img src={{ industry_news.img.url }} alt={{ industry_news.title }} class="img-responsive center-block"></a>
+					<p>
+					{{ industry_news.summary }}
+					</p>
+					<div class="read-more cl-effect-14">
+									<a href={{ industry_news.get_absolute_url }} class="more-link">Continue reading <span class="meta-nav">&gt;</span></a>
+					</div>
+				</div>
+			{% endfor %}	
+		</div>
+		<!-- /业界动态 -->
+			
+			
+		<!-- 热文 -->
+			<div class="col-md-5 content-right">
+				<h5 class="head">热文</h5>	
+				<div class="re-editors-pic-grids">
+					
+				{% for popular in popular_list %}
+					<div class="re-editors-pic">
+						<div class="re-pic">
+							<a href={{ popular.get_absolute_url }}><img src={{ popular.img.url }} alt={{ popular.title }}></a>
+						</div>
+						<div class="re-pic-info">
+							<a href={{ popular.get_absolute_url }}>{{ popular.title }}</a>
+							<p>{{ popular.category }}  {{ popular.created|date:"m-d h:i"}}</p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				{% endfor %}
+			
+			</div>
+				<div class="read-more cl-effect-14">
+						<a href="/status/popular" class="more-link">More Artical <span class="meta-nav">&gt;</span></a>
+				</div>		
+		</div>
+		<div class="clearfix"></div>	
+		<!-- /热文 -->
+		</div>
+	</div>	
+	{% endblock %}

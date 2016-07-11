@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Lands &amp; Blog</title>
+
+		<!-- meta -->
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	    <!-- css -->
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/static/css/ionicons.min.css">
+		<link rel="stylesheet" href="/static/css/pace.css">
+	    <link rel="stylesheet" href="/static/css/custom.css">
+		<link rel="stylesheet" href="/static/css/index_style.css">
+		<link rel="stylesheet" href="/static/css/flexslider.css">
+		<link rel="stylesheet" href="/static/css/monokai.css">
+		<link rel="shortcut icon" type="image/x-icon" href="/static/img/lands.ico">
+
+	    <!-- js -->
+	    <script src="/static/js/jquery-2.1.3.min.js"></script>
+	    <script src="/static/js/bootstrap.min.js"></script>
+	    <script src="/static/js/pace.min.js"></script>
+	    <script src="/static/js/modernizr.custom.js"></script>
+		<script src="/static/js/jquery.flexslider-min.js"></script>
+		<script src="/static/js/selectnav.min.js"></script>
+		<script src="/static/js/custom-slider.js"></script>
+		<!-- Highlight -->
+		<script src="/static/js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+	</head>
+
+	<body>
+		<div class="container">	
+			<header id="site-header">
+				<div class="row">
+					<div class="col-md-4 col-sm-5 col-xs-8">
+						<div class="logo">
+							<h1><a href="/"><b>Lands</b> &amp; Blog</a></h1>
+						</div>
+					</div><!-- col-md-4 -->
+					<div class="col-md-8 col-sm-7 col-xs-4">
+						<nav class="main-nav" role="navigation">
+							<div class="navbar-header">
+  								<button type="button" id="trigger-overlay" class="navbar-toggle">
+    								<span class="ion-navicon"></span>
+  								</button>
+							</div>
+
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  								<ul class="nav navbar-nav navbar-right">
+								{% for nav in nav_list %}
+    								<li class="cl-effect-11"><a href={{ nav.url }} data-hover={{ nav }}>{{ nav.name }}</a></li>
+								{% endfor %}
+  								</ul>
+							</div><!-- /.navbar-collapse -->
+						</nav>
+						<div id="header-search-box">
+							<a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
+							<div id="search-form" class="search-form">
+								<form role="search" method="get" id="searchform" action="#">
+									<input type="search" placeholder="Search" required>
+									<button type="submit"><span class="ion-ios-search-strong"></span></button>
+								</form>				
+							</div>
+						</div>
+					</div><!-- col-md-8 -->
+				</div>
+			</header>
+		</div>
+	
+		
+		
+		
+		
+		{% block page-content %}
+		{% endblock %}
+
+		
+		<footer id="site-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<p class="copyright">&copy; Copyright  2015-2016  LANDSBLOG.COM <a href="http://www.landsblog.com/" target="_blank" title="模板之家"> 蘭兹 </a>-粤ICP备14037330号</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Mobile Menu -->
+		<div class="overlay overlay-hugeinc">
+			<button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
+			<nav>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="full-width.html">Blog</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<script src="js/script.js"></script>
+
+	</body>
+</html>
