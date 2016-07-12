@@ -1,2 +1,12 @@
-It`s a readme.txt for my Rss_Blog project
-test the difference between the 'add'
+这是一个集合订阅内容&个人博客的Django项目。
+
+配置：Django1.8 + Python3.4 + Bootstrap3.0
+
+网站已经上线：http://www.landsblog.com 项目仍在不断更新。
+
+目前项目集成：
+	|-1.订阅功能：自动订阅虎嗅、人人都是产品经理、果壳网等60多个IT资讯网站内容，每4小时自动更新推送至网站首页。
+	|-2.个人博客：普通的个人博客功能，包含博客分类、推荐博客、阅读排行榜、热门标签板块。
+	|-3.评论功能：Django自带评论模块Django-comments，并加以修改。
+	
+
