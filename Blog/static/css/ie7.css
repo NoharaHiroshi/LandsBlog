@@ -1,0 +1,10 @@
+/* Misc */
+hr { margin-bottom: 10px; }
+#sliderNav { bottom: 40px; }
+#comments .comments-list .comment { padding: 20px 0 0; }
+#main .collapsible .zoom.align-right a span, #main .collapsible .zoom.align-left a span { margin-bottom: 0; }
+#main .gallery-list li { display: inline; }
+#main .gallery-list .entry-content { padding-bottom: 5px; }
+
+/* Media Queries */
+@media only screen and (max-width: 1024px) { #main .gallery-list .zoom a span { right: 8px; } }

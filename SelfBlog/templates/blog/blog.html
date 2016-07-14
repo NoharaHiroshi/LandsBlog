@@ -1,124 +1,174 @@
 {% extends "base.html" %}
-{% load custom_markdown %}
 {% load comments %}
-	{% block page-content %}
+{% load custom_markdown %}
+		{% block page-content %}
+		
+<div id="nav-shadow"></div>
+		<!-- 左侧栏 -->
+		<div id="content">
 
-		<div class="content-body" >
-			<div class="container">
-				<div class="row">
-				
-					<main class="col-md-8">
-						<article class="post">
-							<header class="entry-header">
-								<i class="line"> </i>
-								<h1 class="entry-title">
-									<a href="">{{ blog.title }}</a>
-								</h1>
-								<i class="line"> </i>
-								<div class="entry-meta">
-									<span class="post-category"><a href="#">{{ blog.category }}</a></span>
-			
-									<span class="post-date"><a href="#"><time class="entry-date" datetime="2012-11-09T23:15:57+00:00">{{ blog.created|date:"m-d h:i"}}</time></a></span>
-			
-									<span class="post-author"><a href="#">{{ blog.owner }}</a></span>
-									
-									<span class="post-author"><a href="#">阅读 ({{ blog.read_times }})</a></span>
-									{% get_comment_count for blog as blog_count %}
-									<span class="comments-link"><a href="#">评论 ({{ blog_count }})</a></span>
-								</div>
-							</header>
-							<div class="entry-content clearfix">
-								<p>{{ blog.html_content|custom_markdown|removetags:"a span div" }}</p>
-							</div>
-							<hr>
-						</article>
-						
-				
-						
-						<h1 class="page-title">Comments</h1>
-						<article class="sub_comment">
-							<div class="entry-content clearfix">
-								<form action="/comment/" method="post" class="contact-form">
-										<div class="row">
-											<div class="col-md-9 content-left">
-												<input type="hidden" name="artical_id" value="{{artical.id}}" />
-												<input type="hidden" name="artical_slug" value="{{artical.slug}}" />
-												<input type="text" name="artical_name" placeholder="Name" required="">
-												<textarea name="comment_content" rows="7" placeholder="Your Comment" required=""></textarea>
-												<button class="btn-send btn-5 btn-5b ion-ios-paperplane"><span>Submit</span></button>
-											</div>
-										</div>	<!-- row -->
-								</form>
-							</div>
-							<hr>
-					</article>
-					
-					
-					<h1 class="page-title">Recent Comments</h1>
-					<div class="comment-editor">
-					{% get_comment_list for blog as blog_comment_list %}
-					{% for comment in blog_comment_list %}
-					<img src="/upload/user/default_user.jpg">
-						<h5>
-						<strong>{{ comment.name }}</strong>{{ comment.submit_date|timesince }} ago
-						</h5>
-							<p>{{ comment.comment }}<p>
-						<hr>
-					{%endfor %}
-					</div>
-				</main>
-					
-					
-					<aside class="col-md-4">
-						<div class="widget widget-recent-posts">		
-							<h3 class="widget-title">Recent Posts</h3>		
-							<ul>
-							{% for blog in read_list %}
-								<li>
-									<a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a>
-								</li>
-							{% endfor %}
-							</ul>
-							<hr>
-						</div>
-						
-						<div class="widget widget-recent-posts">		
-							<h3 class="widget-title">Recommend Posts</h3>		
-							<ul>
-							{% for blog in recommend %}
-								<li>
-									<a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a>
-								</li>
-							{% endfor %}
-							</ul>
-							<hr>
-						</div>
-						
-						
-						<div class="widget widget-hot-tag">	
-							<h3 class="widget-title">Tags</h3>		
-							<ul>
-							{% for tag in tag %}
-                                    <li><a href="/blog/tag/{{ tag.slug }}" target="_blank">{{ tag.label }}</a></li>
-							{% endfor %}
-                            </ul>
-							<hr>
-					  </div>
+	<div class="container">
 
-						<div class="widget widget-category">		
-							<h3 class="widget-title">Category</h3>		
-							<ul>
-							{% for category in category %}
-								<li>
-									<a href="/blog/category/{{ category.slug }}">{{ category.label }}</a>
-								</li>
-							{% endfor %}
-							</ul>
-							<hr>
-						</div>
-					</aside>
+		<div id="main">
+		
+						
+			<div class="entry-artical">
+
+				<div class="entry-artical-header">
+
+					<h2 class="title"><a href="{{ artical.get_absolute_url }}">{{ blog.title }}</a></h2>
+
+					<p class="meta">
+					<span class="entry-separator"><a href="/artical/{{ artical.category.slug }}"> {{ blog.category}} </a></span>
+					<span class="entry-separator"> {{ blog.created|date:"m-d h:i"}} </span> 
+					<span class="entry-separator"> {{ blog.owner }} </span> 
+					<span class="entry-separator">阅读 ({{ blog.read_times}})</span>
+					{% get_comment_count for blog as blog_count %}
+					<span class="entry-separator">评论 ({{ blog_count }})</span>
+					</p>
+
+				</div><!-- end .entry-header -->
+				
+				<div class="entry-tag">
+				<ul>
+					{% for tag in blog.tags.select_related %}
+						<a href="/tag/{{ tag.slug }}">{{ tag }}</a>
+					{% endfor %}
+				</ul>
 				</div>
-			</div>
-		</div>
+
+				<div class="entry-artical-content">
+
+					<p>{{blog.html_content|custom_markdown|removetags:"a span div"}}</p>
+
+
+					<hr />
+					
+					
+				</div><!-- end .entry-content -->
+				
+				<h1 class="page-title">Comments</h1>
+				<article class="sub_comment">
+						<div class="entry-comment-content">
+							<form action="/comment/" method="post" class="contact-form">
+									<div class="row">
+										<div class="content-left">
+											<input type="hidden" name="artical_id" value="{{artical.id}}" />
+											<input type="hidden" name="artical_slug" value="{{artical.slug}}" />
+											<input type="text" name="artical_name" placeholder="Name" required="">
+											<textarea name="comment_content" rows="7" placeholder="Your Comment" required=""></textarea>
+											<button class="entry-comment-but"><span>Submit</span></button>
+										</div>
+									</div>	<!-- row -->
+							</form>
+						</div>
+				</article>
+				
+				<h1 class="page-title">Recent Comments</h1>
+				<div class="comment-editor">
+				{% get_comment_list for blog as blog_comment_list %}
+				{% for comment in blog_comment_list %}
+				<img src="/upload/user/default_user.jpg" width="60px" height="60px" >
+					<h5>
+					<strong>{{ comment.name }}</strong>发表于{{ comment.submit_date|timesince }} ago
+					</h5>
+						<p>{{ comment.comment }}<p>
+					<hr>
+				{%endfor %}
+				</div>
+
+			</div><!-- end .entry -->
 			
-{% endblock %}
+
+		</div><!-- end #main -->
+
+		<div id="sidebar">
+		
+
+			
+			<div id="recent-tabs" class="box">
+			
+				<div class="box-header">
+
+					<ul class="nav">
+						<li><a class="current" href="#recent-tabs-posts">最新博文</a></li>
+						<li><a href="#recent-tabs-comments">推荐博文</a></li>
+					</ul>
+
+				</div><!-- end .box-header -->
+
+				<div class="list-wrap">
+
+					<ul id="recent-tabs-posts">
+					{% for blog in read_list %}
+						<li>
+							<a href="{{ blog.get_absolute_url }}" class="title">
+								<img src="{{ blog.img.url }}" width="100" height="60" alt="{{ blog.title }}" />
+								{{ blog.title }}
+							</a>
+							<p class="meta">发布于 <a href="#">{{ blog.created|date:"m-d h:i"}}</a> by <a href="#">{{ blog.owner }}</a></p>
+						</li>
+					{% endfor %}
+
+					</ul><!-- end #recent-tabs-posts-->
+
+					<ul id="recent-tabs-comments" class="hide">
+					{% for blog in recommend %}
+						<li>
+							<a href="{{ blog.get_absolute_url }}" class="title">
+								<img src="{{ blog.img.url }}" width="100" height="60" alt="{{ blog.title }}" />
+								{{ blog.title }}
+							</a>
+							<p class="meta">发布于 <a href="#">{{ blog.created|date:"m-d h:i"}}</a> by <a href="#">{{ blog.owner }}</a></p>
+						</li>
+					{% endfor %}
+						
+					</ul><!-- end #recent-tabs-comments -->
+
+				</div><!-- end .list-wrap -->
+				
+			</div><!-- end #recent-tabs -->
+			
+			<div class="tags box">
+
+				<div class="box-header">
+
+					<h6>博文分类</h6>
+
+				</div><!-- end .box-header -->
+
+				<ul>
+				{% for category in category %}
+					<li><a href="/blog/category/{{ category.slug }}">{{ category.label }}</a></li>
+				{% endfor%}
+				</ul>
+
+			</div><!-- end .tags -->
+
+
+			<div class="tags box">
+
+				<div class="box-header">
+
+					<h6>博文标签</h6>
+
+				</div><!-- end .box-header -->
+
+				<ul>
+				{% for tag in tag %}
+					<li><a href="/blog/tag/{{ tag.slug }}">{{ tag.label }}</a></li>
+				{% endfor%}
+				</ul>
+
+			</div><!-- end .tags -->
+			
+
+
+		</div><!-- end #sidebar -->
+
+		<div class="clear"></div>
+
+	</div><!-- end .container -->
+
+</div><!-- end #content -->
+		{% endblock %}

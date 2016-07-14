@@ -23,21 +23,23 @@ class BaseMixin(object):
             # 设置导航条
             context['nav_list'] = Nav.objects.filter(used=True)
             # 设置每日热点
-            context['daily_list'] = Blog.objects.filter(blog_in_status=2).order_by('-created')[0:3]
+            context['daily_list'] = Blog.objects.filter(blog_in_status=2).order_by('-created')[0:4]
             # 设置订阅内容
-            context['rss_list'] = Blog.objects.filter(blog_in_status=3).order_by('-created')[0:6]
+            context['rss_list'] = Blog.objects.filter(blog_in_status=3).order_by('-created')[0:10]
             # 设置每日热评
             context['daily_comment_list'] = Blog.objects.filter(blog_in_status=4).order_by('-created')[0:6]
             # 设置热点新闻
             context['hotspot'] = HotSpot.objects.all()[0:1]
             # 设置业界动态
-            context['industry_news_list'] = Blog.objects.filter(blog_in_status=5).order_by('-created')[0:3]
-            # 设置业界动态
+            context['industry_news_list'] = Blog.objects.filter(blog_in_status=5).order_by('-created')[0:4]
+            # 设置热文
             context['popular_list'] = Blog.objects.filter(blog_in_status=8).order_by('-created')[0:6]
             # 设置排行榜
             context['ranking_list'] = Blog.objects.all().order_by('-read_times')[0:10]
             # 设置分类列表
             context['category_list'] = Category.objects.all()
+            # 设置标签列表
+            context['tag_list'] = Tag.objects.all()
         except Exception as e:
             logger.error(u'加载基本信息(BaseMixin)出错')
 
@@ -50,10 +52,19 @@ class IndexView(BaseMixin, ListView):
     template_name = 'index.html'
     # 设置object_list别名blog_list
     context_object_name = 'blog_list'
+    paginate_by = settings.PAGE_NUM
 
     # 设置index.html的展示内容：站点名称、站点欢迎语、导航条、推荐列表、轮播图
-
     def get_context_data(self, **kwargs):
+        page_num = self.kwargs.get('page','')
+        artical_list_all = Blog.objects.all().order_by('-created')[0:100]
+        paginator = Paginator(artical_list_all, self.paginate_by)
+        try:
+            kwargs['artical_list'] = paginator.page(page_num)
+        except PageNotAnInteger:
+            kwargs['artical_list'] = paginator.page(1)
+        except EmptyPage:
+            kwargs['artical_list'] = paginator.page(paginator.num_pages)
         kwargs['carousel_list'] = Carousel.objects.all()
         return super(IndexView, self).get_context_data(**kwargs)
 
@@ -61,7 +72,7 @@ class IndexView(BaseMixin, ListView):
     def get_queryset(self):
         # 获取Blog所有对象，以blog_list表示，用以template，原始的方式是queryset = Blog.objects.all()，以这种方式获取的Blog
         # 对象，会隐式的用object_list表示Blog对象列表，而context_object_name赋予object有意义的名字
-        blog_list = Blog.objects.filter(top=True)
+        blog_list = Blog.objects.all()
         return blog_list
 
 
@@ -77,11 +88,11 @@ class ArticalListView(BaseMixin, ListView):
         artical_list_all = Category.objects.get(slug=category).blog_set.all().order_by('-created')
         paginator = Paginator(artical_list_all, self.paginate_by)
         try:
-            kwargs['artical_category_list'] = paginator.page(page_num)
+            kwargs['artical_list'] = paginator.page(page_num)
         except PageNotAnInteger:
-            kwargs['artical_category_list'] = paginator.page(1)
+            kwargs['artical_list'] = paginator.page(1)
         except EmptyPage:
-            kwargs['artical_category_list'] = paginator.page(paginator.num_pages)
+            kwargs['artical_list'] = paginator.page(paginator.num_pages)
         kwargs['category_name'] = Category.objects.get(slug = self.kwargs.get('info'))
         return super(ArticalListView, self).get_context_data(**kwargs)
 
@@ -167,6 +178,9 @@ class ArticalView(BaseMixin, DetailView):
         artical.read_times += 1
         artical.save()
         return super(ArticalView, self).get(request, *args, **kwargs)
+
+
+
 
 
 # —————————————————sub_comment——————————————————

@@ -7,6 +7,8 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
   overflow-x: auto;
   padding: 0.5em;
   background: #272822; color: #ddd;
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  font-size:14px;
 }
 
 .hljs-tag,

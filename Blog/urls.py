@@ -4,6 +4,7 @@ from django.conf import settings
 
 urlpatterns = [
       url(r'^$', IndexView.as_view(), name='index_view' ),
+      url(r'^(?P<page>\d+)', IndexView.as_view() ),
       url(r'^upload/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT }),
       url(r'^artical/(?P<info>\w*)$', ArticalListView.as_view(), name='artical_list_view' ),
       url(r'^artical/(?P<info>\w*)/(?P<page>\d+)/$', ArticalListView.as_view()),

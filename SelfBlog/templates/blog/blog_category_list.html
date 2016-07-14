@@ -1,119 +1,162 @@
 {% extends "base.html" %}
-{% load custom_markdown %}
 {% load comments %}
-	{% block page-content %}
 
-		<div class="content-body" >
-			<div class="container">
-				<div class="row">
-					<main class="col-md-8">
-					<h5 class="head">{{ category_name.label }}</h5>
-					{% for blog in blog_category_list %}
-						<article class="post">
-							<header class="entry-header">
-								<i class="line"> </i>
-								<h1 class="entry-title">
-									<a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a>
-								</h1>
-								<i class="line"> </i>
-								<div class="entry-meta">
-									<span class="post-category"><a href="#">{{ blog.category }}</a></span>
-			
-									<span class="post-date"><a href="#"><time class="entry-date" datetime="2012-11-09T23:15:57+00:00">{{ blog.created|date:"m-d h:i"}}</time></a></span>
-			
-									<span class="post-author"><a href="#">{{ blog.owner }}</a></span>
-									
-									<span class="post-author"><a href="#">阅读 ({{ blog.read_times }})</a></span>
-									{% get_comment_count for blog as blog_count %}
-									<span class="comments-link"><a href="#">评论 ({{ blog_count }})</a></span>
-								</div>
-							</header>
-							<div class="entry-content clearfix">
-								<p>{{ blog.summary|custom_markdown }}</p>
-								<div class="read-more cl-effect-14">
-									<a href="#" class="more-link">Continue reading <span class="meta-nav">></span></a>
-								</div>
-							</div>
-						</article>
-						{% endfor %}
+		{% block page-content %}
+		
+<div id="nav-shadow"></div>
+		<!-- 左侧栏 -->
+		<div id="content">
 
+	<div class="container">
+
+		<div id="main">
+		
 						
-				<div class="pag-nations">
-					<ul class="p_n-list">
-					{% if blog_category_list.has_previous %}
-							<li><a href="/blog/category/{{ blog_category_list.previous_page_number }}" class="prev"></a></li>
-						{% else %}
-							<li><a href="" class="prev"></a></li>
-						{% endif %}
-						
-						{%for page_number in blog_category_list.paginator.page_range %}
-							{% if page_number = blog_category_list.number %}
-								<li class="active"><a href="">{{ page_number }}</a></li>
-							{% else %}
-								<li><a href="/blog/category/{{ page_number }}">{{ page_number }}</a></li>
-							{% endif %}
-						{% endfor %}
-						
-						{% if blog_category_list.has_next %}
-							<li><a href="/blog/category/{{ blog_category_list.next_page_number }}" class="next"></a></li>
-						{% else %}
-							<li><a href="" class="next"></a></li>
-						{% endif %}
+			{% for blog in blog_category_list %}
+			<div class="entry">
+
+				<div class="entry-header">
+					<h2 class="category"><a href="">{{ blog.category }}</a></h2>
+					
+					<h2 class="title"><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></h2>
+
+				</div><!-- end .entry-header -->
+				
+
+				<div class="entry-content">
+
+					<a href="{{ blog.get_absolute_url }}"><img src="{{ blog.img.url }}" width="240" height="140" alt="" class="entry-image" /></a>
+					{% get_comment_count for blog as blog_count %}
+					<p class="blog-meta">发布于 {{ blog.created|date:"m-d h:i"}} <span class="meta-span"></span>阅读 ({{ blog.read_times }}) <span class="meta-span"></span> 评论 ({{ blog_count }}) </p>
+					<p>{{blog.summary }}</p>
+					<div class="read-more cl-effect-14">
+							<a href={{ blog.get_absolute_url }} class="more-link">Continue reading</a>
+					</div>
+
+					<hr />
+					<ul class="entry-links">
+					{% for tag in blog.tags.select_related %}
+						<li><a href="/blog/tag/{{ tag.slug }}">{{ tag }}</a></li>
+					{% endfor %}
 					</ul>
-				</div>
-					</main>
 					
-					
-					<aside class="col-md-4">
-						<div class="widget widget-recent-posts">		
-							<h3 class="widget-title">Recent Posts</h3>		
-							<ul>
-							{% for blog in read_list %}
-								<li>
-									<a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a>
-								</li>
-							{% endfor %}
-							</ul>
-							<hr>
-						</div>
-						
-						<div class="widget widget-recent-posts">		
-							<h3 class="widget-title">Recommend Posts</h3>		
-							<ul>
-							{% for blog in recommend %}
-								<li>
-									<a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a>
-								</li>
-							{% endfor %}
-							</ul>
-							<hr>
-						</div>
-						
-						
-						<div class="widget widget-hot-tag">	
-							<h3 class="widget-title">Tags</h3>		
-							<ul>
-							{% for tag in tag %}
-                                    <li><a href="/blog/tag/{{ tag.slug }}" target="_blank">{{ tag.label }}</a></li>
-							{% endfor %}
-                            </ul>
-							<hr>
-					  </div>
+				</div><!-- end .entry-content -->
 
-						<div class="widget widget-category">		
-							<h3 class="widget-title">Category</h3>		
-							<ul>
-							{% for category in category %}
-								<li>
-									<a href="/blog/category/{{ category.slug }}">{{ category.label }}</a>
-								</li>
-							{% endfor %}
-							</ul>
-							<hr>
-						</div>
-					</aside>
-				</div>
-			</div>
-		</div>
+			</div><!-- end .entry -->
+			{% endfor %}
 			
-{% endblock %}
+			
+			
+			<ul class="pagination">
+			{% if blog_category_list.has_previous %}
+				<li class="prev"><a href="/blog/{{ blog_category_list.previous_page_number }}">< Prev</a></li>
+			{% else %}
+				<li class="prev"><a href="#">< Prev</a></li>
+			{% endif %}
+			
+			{% for page_number in blog_category_list.paginator.page_range %}
+				{% if page_number = blog_category_list.number %}
+				<li class="active"><a href="">{{ page_number }}</a></li>
+				{% else %}
+				<li><a href="/blog/{{ page_number }}">{{ page_number }}</a></li>
+				{% endif %}
+			{% endfor %}
+			{% if blog_category_list.has_next %}
+				<li class="next"><a href="/blog/{{ blog_category_list.next_page_number }}">Next ></a></li>
+			{% else %}
+				<li class="next"><a href="#">Next ></a></li>
+			{% endif %}
+			</ul>
+
+		</div><!-- end #main -->
+
+		<div id="sidebar">
+		
+
+			
+			<div id="recent-tabs" class="box">
+			
+				<div class="box-header">
+
+					<ul class="nav">
+						<li><a class="current" href="#recent-tabs-posts">最新博文</a></li>
+						<li><a href="#recent-tabs-comments">推荐博文</a></li>
+					</ul>
+
+				</div><!-- end .box-header -->
+
+				<div class="list-wrap">
+
+					<ul id="recent-tabs-posts">
+					{% for blog in read_list %}
+						<li>
+							<a href="{{ blog.get_absolute_url }}" class="title">
+								<img src="{{ blog.img.url }}" width="100" height="60" alt="{{ blog.title }}" />
+								{{ blog.title }}
+							</a>
+							<p class="meta">发布于 <a href="#">{{ blog.created|date:"m-d h:i"}}</a> by <a href="#">{{ blog.owner }}</a></p>
+						</li>
+					{% endfor %}
+
+					</ul><!-- end #recent-tabs-posts-->
+
+					<ul id="recent-tabs-comments" class="hide">
+					{% for blog in recommend %}
+						<li>
+							<a href="{{ blog.get_absolute_url }}" class="title">
+								<img src="{{ blog.img.url }}" width="100" height="60" alt="{{ blog.title }}" />
+								{{ blog.title }}
+							</a>
+							<p class="meta">发布于 <a href="#">{{ blog.created|date:"m-d h:i"}}</a> by <a href="#">{{ blog.owner }}</a></p>
+						</li>
+					{% endfor %}
+						
+					</ul><!-- end #recent-tabs-comments -->
+
+				</div><!-- end .list-wrap -->
+				
+			</div><!-- end #recent-tabs -->
+			
+			<div class="tags box">
+
+				<div class="box-header">
+
+					<h6>博文分类</h6>
+
+				</div><!-- end .box-header -->
+
+				<ul>
+				{% for category in category %}
+					<li><a href="/blog/category/{{ category.slug }}">{{ category.label }}</a></li>
+				{% endfor%}
+				</ul>
+
+			</div><!-- end .tags -->
+
+
+			<div class="tags box">
+
+				<div class="box-header">
+
+					<h6>博文标签</h6>
+
+				</div><!-- end .box-header -->
+
+				<ul>
+				{% for tag in tag %}
+					<li><a href="/blog/tag/{{ tag.slug }}">{{ tag.label }}</a></li>
+				{% endfor%}
+				</ul>
+
+			</div><!-- end .tags -->
+			
+
+
+		</div><!-- end #sidebar -->
+
+		<div class="clear"></div>
+
+	</div><!-- end .container -->
+
+</div><!-- end #content -->
+		{% endblock %}
