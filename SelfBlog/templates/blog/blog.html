@@ -21,11 +21,25 @@
 					<p class="meta">
 					<span class="entry-separator"><a href="/artical/{{ artical.category.slug }}"> {{ blog.category}} </a></span>
 					<span class="entry-separator"> {{ blog.created|date:"m-d h:i"}} </span> 
-					<span class="entry-separator"> {{ blog.owner }} </span> 
 					<span class="entry-separator">阅读 ({{ blog.read_times}})</span>
-					{% get_comment_count for blog as blog_count %}
-					<span class="entry-separator">评论 ({{ blog_count }})</span>
+					<span class="entry-separator">评论 (<span class="ds-thread-count" data-thread-key="{{ blog.slug }}" data-count-type="comments" ></span>)</span>
 					</p>
+					
+					<div class="ds-share flat" data-thread-key="{{ artical.slug }}" data-title="{{ artical.title }}" data-images="/upload/user/default_user.jpg" data-content="{{ artical.summary }}" data-url="{{artical.get_absolute_url}}">
+					<div class="ds-share-inline">
+					<ul  class="ds-share-icons-16">
+      	
+						<li><a class="ds-more" href="">分享到：</a></li>
+						<li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+						<li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+						<li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+						<li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      	
+					</ul>
+					<div class="ds-share-icons-more">
+					</div>
+				</div>
+				</div>
 
 				</div><!-- end .entry-header -->
 				
@@ -47,35 +61,9 @@
 					
 				</div><!-- end .entry-content -->
 				
-				<h1 class="page-title">Comments</h1>
-				<article class="sub_comment">
-						<div class="entry-comment-content">
-							<form action="/comment/" method="post" class="contact-form">
-									<div class="row">
-										<div class="content-left">
-											<input type="hidden" name="artical_id" value="{{artical.id}}" />
-											<input type="hidden" name="artical_slug" value="{{artical.slug}}" />
-											<input type="text" name="artical_name" placeholder="Name" required="">
-											<textarea name="comment_content" rows="7" placeholder="Your Comment" required=""></textarea>
-											<button class="entry-comment-but"><span>Submit</span></button>
-										</div>
-									</div>	<!-- row -->
-							</form>
-						</div>
-				</article>
-				
-				<h1 class="page-title">Recent Comments</h1>
-				<div class="comment-editor">
-				{% get_comment_list for blog as blog_comment_list %}
-				{% for comment in blog_comment_list %}
-				<img src="/upload/user/default_user.jpg" width="60px" height="60px" >
-					<h5>
-					<strong>{{ comment.name }}</strong>发表于{{ comment.submit_date|timesince }} ago
-					</h5>
-						<p>{{ comment.comment }}<p>
-					<hr>
-				{%endfor %}
-				</div>
+				<!-- 多说评论框 start -->
+				<div class="ds-thread"  data-thread-key="{{ blog.slug }}" data-title="{{ blog.title }}" data-url="{{ blog.get_absolute_url }}"></div>
+				<!-- 多说评论框 end -->
 
 			</div><!-- end .entry -->
 			

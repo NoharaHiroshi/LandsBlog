@@ -41,8 +41,8 @@ dl { margin: 0 0 10px; }
 
 .logo{
 	font-family:'Lato', sans-serif;
-	font-size:36px;
-	padding: 20px 10px;
+	font-size:36px!important;
+	padding: 20px 10px!important;
 	float:right;
 	font-weight: 300;
 	color:#fff;
@@ -56,6 +56,15 @@ dl { margin: 0 0 10px; }
 
 b {
     font-weight: 400;
+}
+
+.ds-thread{
+	padding: 0 30px;
+}
+
+.ds-share{
+	float:right;
+	z-index:-100;
 }
 		
 /* ---------------------------------------------------- */
@@ -663,7 +672,7 @@ dl.horizontal dd {
 	#main .entry-artical .entry-separator{
 		font-size:14px;
 		line-height:30px;
-		margin-right:20px;
+		margin-right:10px;
 	}
 	
 		#main .entry-artical-header {
@@ -695,7 +704,7 @@ dl.horizontal dd {
 	
 				#main .entry-artical-header .title, #main .entry-artical-header .title a { color: #4e4d4a; font-size: 28px; line-height: 1.4em; margin-bottom:15px;}
 				
-				#main .entry-artical-header .title, #main .entry-artical-header .title a:hover{ color: #28b8ff; transition: all .3s ease-out; font-weight:300}
+				#main .entry-artical-header .title, #main .entry-artical-header .title a:hover{ color: #28b8ff; transition: all .3s ease-out; font-weight:300; width:600px;}
 	
 			#main .entry-artical-header .meta { margin: 0 0 0 2px;}
 	

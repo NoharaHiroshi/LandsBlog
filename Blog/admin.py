@@ -7,20 +7,41 @@ from django_markdown.admin import MarkdownModelAdmin
 
 # —————————————————BlogAdmin——————————————————
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('title','slug', 'owner', 'status', 'blog_in_status', 'created', 'modified','read_times','top', 'id')
+    list_display = ('title', 'owner', 'status', 'blog_in_status', 'created', 'modified','read_times','top', 'id')
     search_fields = ('title', 'markdown_content')
     # 状态选择器
     list_filter = ('status', 'blog_in_status', 'owner', 'created', 'modified',)
     # 关联字段，slug会将title字段中的英文字符自动填充到slug字段
     prepopulated_fields = {'slug': ('title',)}
-    actions = ['make_blog_public']
+    actions = ['make_blog_public', 'change_blog_daily_status', 'change_blog_popular_status', 'change_blog_industry_status']
 
     def make_blog_public(self, request, queryset):
-        # queryset参数为选中的Story对象
+        # queryset参数为选中的Blog对象
         rows_updated = queryset.update(status=3)
         message_bit = "%s 篇文章" % rows_updated
         self.message_user(request, "%s 已成功标记为已发布状态." % message_bit)
     make_blog_public.short_description = u'修改选中文章为已发布状态'
+
+    def change_blog_daily_status(self, request, queryset):
+        # queryset参数为选中的Blog对象
+        rows_updated = queryset.update(blog_in_status = 2)
+        message_bit = "%s 篇文章" % rows_updated
+        self.message_user(request, "%s 已成功移至每日热点" % message_bit)
+    change_blog_daily_status.short_description = u'将选中文章移至每日热点'
+
+    def change_blog_popular_status(self, request, queryset):
+        # queryset参数为选中的Blog对象
+        rows_updated = queryset.update(blog_in_status = 4)
+        message_bit = "%s 篇文章" % rows_updated
+        self.message_user(request, "%s 已成功移至每日热评" % message_bit)
+    change_blog_popular_status.short_description = u'将选中文章移至每日热评'
+
+    def change_blog_industry_status(self, request, queryset):
+        # queryset参数为选中的Blog对象
+        rows_updated = queryset.update(blog_in_status = 5)
+        message_bit = "%s 篇文章" % rows_updated
+        self.message_user(request, "%s 已成功移至业界动态" % message_bit)
+    change_blog_industry_status.short_description = u'将选中文章移至业界动态'
 
 
 # —————————————————CategoryAdmin——————————————————

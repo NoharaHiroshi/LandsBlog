@@ -93,9 +93,8 @@
 								</a>
 								<p class="meta">发布于 <a href="#">{{ daily.created|date:"m-d h:i" }}</a> by <a href="#">{{ daily.owner }}</a></p>
 								<ul class="links">
-									{% get_comment_count for daily as daily_count %}
-									<li><a href="#">评论 ({{ daily_count }})</a> <span class="separator">•</span></li>
-									<li><a href="#">阅读 ({{ daily.read_times }})</a></li>
+									<li><a href="#">阅读 ({{ daily.read_times }})</a> <span class="separator">•</span></li>
+									<li><a href="#">评论 (<span class="ds-thread-count" data-thread-key="{{ daily.slug }}" data-count-type="comments" ></span>)</a></li>
 								</ul>
 							</div><!-- end .content -->
 						</li><!-- end .nav-button -->
@@ -146,8 +145,7 @@
 								</a>
 								<p class="meta">发布于 <a href="#">{{ industry_news.created|date:"m-d h:i" }}</a> by <a href="#">{{ industry_news.owner }}</a></p>
 								<ul class="links">
-								{% get_comment_count for industry_news as industry_news_count %}
-									<li><a href="#">评论 ({{ industry_news_count }})</a> <span class="separator">•</span></li>
+									<li><a href="#">评论 (<span class="ds-thread-count" data-thread-key="{{ industry_news.slug }}" data-count-type="comments" ></span>)</a> <span class="separator">•</span></li>
 									<li><a href="#">阅读 ({{ industry_news.read_times }})</a></li>
 								</ul>
 							</div><!-- end .content -->
@@ -173,8 +171,9 @@
 				<div class="entry-content">
 
 					<a href="{{ artical.get_absolute_url }}"><img src="{{ artical.img.url }}" width="240" height="140" alt="" class="entry-image" /></a>
-					{% get_comment_count for artical as artical_count %}
-					<p class="blog-meta">{{ artical.created|date:"m-d h:i"}} <span class="meta-span"></span>阅读 ({{ artical.read_times }}) <span class="meta-span"></span> 评论 ({{ artical_count }}) </p>
+					<p class="blog-meta">{{ artical.created|date:"m-d h:i"}} 
+					<span class="meta-span"></span>阅读 ({{ artical.read_times }}) 
+					<span class="meta-span"></span> 评论 (<span class="ds-thread-count" data-thread-key="{{ artical.slug }}" data-count-type="comments" ></span>)</p>
 					<p>{{artical.summary }}</p>
 					<div class="read-more cl-effect-14">
 							<a href={{ artical.get_absolute_url }} class="more-link">Continue reading</a>

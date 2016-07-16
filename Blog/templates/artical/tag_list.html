@@ -46,8 +46,7 @@
 				<div class="entry-content">
 
 					<a href="{{ artical.get_absolute_url }}"><img src="{{ artical.img.url }}" width="240" height="140" alt="" class="entry-image" /></a>
-					{% get_comment_count for artical as artical_count %}
-					<p class="blog-meta">{{ artical.created|date:"m-d h:i"}} <span class="meta-span"></span>阅读 ({{ artical.read_times }}) <span class="meta-span"></span> 评论 ({{ artical_count }}) </p>
+					<p class="blog-meta">{{ artical.created|date:"m-d h:i"}} <span class="meta-span"></span>阅读 ({{ artical.read_times }}) <span class="meta-span"></span> 评论 (<span class="ds-thread-count" data-thread-key="{{ artical.slug }}" data-count-type="comments" ></span>) </p>
 					<p>{{artical.summary }}</p>
 					<div class="read-more cl-effect-14">
 							<a href={{ artical.get_absolute_url }} class="more-link">Continue reading</a>
