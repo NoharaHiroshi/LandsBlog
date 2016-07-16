@@ -11,6 +11,7 @@ class BlogAdmin(admin.ModelAdmin):
     search_fields = ('title', 'markdown_content')
     # 状态选择器
     list_filter = ('status', 'blog_in_status', 'owner', 'created', 'modified',)
+    filter_horizontal = ('tags',)
     # 关联字段，slug会将title字段中的英文字符自动填充到slug字段
     prepopulated_fields = {'slug': ('title',)}
     actions = ['make_blog_public', 'change_blog_daily_status', 'change_blog_popular_status', 'change_blog_industry_status']

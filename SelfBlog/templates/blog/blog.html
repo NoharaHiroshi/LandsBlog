@@ -16,16 +16,16 @@
 
 				<div class="entry-artical-header">
 
-					<h2 class="title"><a href="{{ artical.get_absolute_url }}">{{ blog.title }}</a></h2>
+					<h2 class="title"><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></h2>
 
 					<p class="meta">
-					<span class="entry-separator"><a href="/artical/{{ artical.category.slug }}"> {{ blog.category}} </a></span>
+					<span class="entry-separator"><a href="/blog/{{ blog.category.slug }}"> {{ blog.category}} </a></span>
 					<span class="entry-separator"> {{ blog.created|date:"m-d h:i"}} </span> 
 					<span class="entry-separator">阅读 ({{ blog.read_times}})</span>
 					<span class="entry-separator">评论 (<span class="ds-thread-count" data-thread-key="{{ blog.slug }}" data-count-type="comments" ></span>)</span>
 					</p>
 					
-					<div class="ds-share flat" data-thread-key="{{ artical.slug }}" data-title="{{ artical.title }}" data-images="/upload/user/default_user.jpg" data-content="{{ artical.summary }}" data-url="{{artical.get_absolute_url}}">
+					<div class="ds-share flat" data-thread-key="{{ blog.slug }}" data-title="{{ blog.title }}" data-images="/upload/user/default_user.jpg" data-content="{{ blog.summary }}" data-url="{{website_url}}{{blog.get_absolute_url}}">
 					<div class="ds-share-inline">
 					<ul  class="ds-share-icons-16">
       	
@@ -40,13 +40,15 @@
 					</div>
 				</div>
 				</div>
+				
+
 
 				</div><!-- end .entry-header -->
 				
 				<div class="entry-tag">
 				<ul>
 					{% for tag in blog.tags.select_related %}
-						<a href="/tag/{{ tag.slug }}">{{ tag }}</a>
+						<a href="/blog/tag/{{ tag.slug }}">{{ tag }}</a>
 					{% endfor %}
 				</ul>
 				</div>
@@ -57,6 +59,8 @@
 
 
 					<hr />
+					
+				<a href="/aboutme/#donate">感觉不错，我要小额赞助</a>
 					
 					
 				</div><!-- end .entry-content -->

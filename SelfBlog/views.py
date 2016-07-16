@@ -18,6 +18,8 @@ class BaseMixin(object):
     def get_context_data(self, *args, **kwargs):
         context = super(BaseMixin, self).get_context_data(**kwargs)
         try:
+            # 设置站点域名
+            context['website_url'] = settings.WEBSITE_URL
             # 设置导航列表
             context['nav_list'] = Nav.objects.all()
             # 设置博客列表

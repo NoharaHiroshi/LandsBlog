@@ -64,7 +64,16 @@ b {
 
 .ds-share{
 	float:right;
-	z-index:-100;
+}
+
+.sidebar-img{
+	margin-bottom:20px;
+}
+
+.sidebar-img img{
+	max-width:350px;
+	margin:0 10px;
+	border:2px solid #000
 }
 		
 /* ---------------------------------------------------- */
@@ -390,7 +399,6 @@ dl.horizontal dd {
 		}
 		
 #nav-shadow {
-	background: #f3f3f3;
 	height: 135px;
 	margin-bottom: -105px;
 }

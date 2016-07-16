@@ -20,6 +20,8 @@ class BaseMixin(object):
         try:
             # 设置站点名称
             context['website_title'] = settings.WEBSITE_TITLE
+            # 设置站点域名
+            context['website_url'] = settings.WEBSITE_URL
             # 设置导航条
             context['nav_list'] = Nav.objects.filter(used=True)
             # 设置每日热点
@@ -199,3 +201,13 @@ def sub_comment(request):
                 user_name = name,
         )
         return HttpResponseRedirect('/content/%s' %slug)
+
+
+        
+def AboutMeView(request):
+ 
+    static_html = 'about-me.html'
+ 
+    return render(request, static_html)
+
+
