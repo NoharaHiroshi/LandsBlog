@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% load comments %}
 
+{% block title %}
+	<meta name="keywords" content={{ category_name.html_keywords }}>
+	<meta name="description" content={{ category_name.html_description }}>
+	<title>{{ category_name.html_title }}-清心</title>
+{% endblock %}
+
 		{% block page-content %}
 		
 <div id="nav-shadow"></div>

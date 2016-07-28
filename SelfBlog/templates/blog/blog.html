@@ -1,6 +1,12 @@
 {% extends "base.html" %}
-{% load comments %}
 {% load custom_markdown %}
+{% load comments %}
+
+
+{% block title %}
+	<title>{{ blog.title }}-清心</title>
+{% endblock %}
+
 		{% block page-content %}
 		
 <div id="nav-shadow"></div>
@@ -15,11 +21,12 @@
 			<div class="entry-artical">
 
 				<div class="entry-artical-header">
-
+					<div style="width:100%;">
 					<h2 class="title"><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></h2>
+					</div>
 
 					<p class="meta">
-					<span class="entry-separator"><a href="/blog/{{ blog.category.slug }}"> {{ blog.category}} </a></span>
+					<span class="entry-separator"><a href="/blog/category/{{ blog.category.slug }}"> {{ blog.category}} </a></span>
 					<span class="entry-separator"> {{ blog.created|date:"m-d h:i"}} </span> 
 					<span class="entry-separator">阅读 ({{ blog.read_times}})</span>
 					<span class="entry-separator">评论 (<span class="ds-thread-count" data-thread-key="{{ blog.slug }}" data-count-type="comments" ></span>)</span>

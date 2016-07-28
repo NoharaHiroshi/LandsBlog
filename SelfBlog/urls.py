@@ -4,6 +4,7 @@ from django.conf import settings
 
 urlpatterns = [
       url(r'^$', IndexView.as_view(), name='blog'),
+      url(r'(?P<page>\d+)$', IndexView.as_view()),
       url(r'upload/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT }),
       url(r'content/(?P<slug>.*)$', BlogView.as_view(), name='blog'),
       url(r'tag/(?P<tag>\w*)$', TagListView.as_view(), name='Tag_list_view' ),

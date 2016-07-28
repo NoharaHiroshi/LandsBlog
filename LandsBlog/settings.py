@@ -19,7 +19,7 @@ SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 WEBSITE_TITLE = 'Lands&Blog'
 
-WEBSITE_URL = '139.129.205.139'
+WEBSITE_URL = 'http://www.landsblog.com'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -28,9 +28,9 @@ WEBSITE_URL = '139.129.205.139'
 SECRET_KEY = 'yt8x002qv*k2l&-gpgak#)4gk0g##@vd%@u+u4pi2hi-0!(v)e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.landsblog.com','landsblog.com']
 
 SITE_ID = 1
 
@@ -56,6 +56,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.gzip.GZipMiddleware',  
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

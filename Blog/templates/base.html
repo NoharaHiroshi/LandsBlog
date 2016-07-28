@@ -3,8 +3,12 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title> Lands&Blog </title>
-	
+	<meta name="baidu-site-verification" content="qKDa7c2d3Y" />
+	{% block title %}
+	<meta name="keywords" content="清心,Django教程,Django基础教程,Django中文文档,Django开发实例,Python开发,爬虫,蘭兹的博客,RSS订阅">
+	<meta name="description" content="Django基础教程，提供快速学习Django的交流平台，让更多人了解Django，使用Django！">
+	<title>清心-Lands&Blog </title>
+	{% endblock%}
 	<link rel="stylesheet" href="/static/css/reset.css" type="text/css" media="screen" />
 	
 	<!--[if ! lte IE 6]><!-->
@@ -56,8 +60,8 @@
 <div id="footer">
 
 	<div class="container clearfix">
-
-
+		<p>Copyright © 2015-2016 Powered by Lands&Blog All Rights Reserved. 晋ICP备16006695号</p>
+		<p>本站由Django技术开发，托管在阿里云服务器上</p>
 	</div><!-- end .container -->
 
 </div><!-- end #footer -->
@@ -88,6 +92,39 @@ var duoshuoQuery = {short_name:"landsblog"};
 	})();
 	</script>
 <!-- 多说公共JS代码 end -->
+<!-- 百度统计JS代码 -->
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e3fa448570abea355260edfd78a9850a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<!-- 百度统计JS代码 end -->
+<!-- 友盟统计JS代码 -->
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259996603'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1259996603%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+<!-- 友盟统计JS代码end -->
+<!-- 统计在线人数 -->
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259996603'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1259996603%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+<!-- 统计在线人数end -->
+<!-- 百度推送代码 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<!-- 百度推送代码end -->
 <!--[if IE]> <script src="js/selectivizr.js"></script> <![endif]-->
 <!-- end scripts -->
 </body>

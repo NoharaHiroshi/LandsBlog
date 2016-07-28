@@ -26,6 +26,9 @@ ol, ul {
 }
 blockquote, q {
 	quotes: none;
+	border-left: 3px solid #28b8ff;
+    margin-left: 30px;
+    padding: 0 25px;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {

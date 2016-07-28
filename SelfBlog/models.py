@@ -32,6 +32,9 @@ class Tag(models.Model):
 class Category(models.Model):
     label = models.CharField(blank=True, max_length=50)
     slug = models.SlugField()
+    html_title = models.CharField(blank=True, null=True, max_length=20)
+    html_description = models.CharField(blank=True, null=True, max_length=80)
+    html_keywords = models.CharField(blank=True, null=True, max_length=40)
 
     class Meta:
         verbose_name_plural = verbose_name =  '分类'

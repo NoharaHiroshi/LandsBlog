@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% load custom_markdown %}
 {% load comments %}
+
+{% block title %}
+	<title>{{ artical.title }}-清心</title>
+{% endblock %}
+
 		{% block page-content %}
 		<!-- 左侧栏 -->
 <div id="nav-shadow"></div>
@@ -25,7 +30,7 @@
 					<span class="entry-separator">评论 (<span class="ds-thread-count" data-thread-key="{{ artical.slug }}" data-count-type="comments" ></span>) </span>
 					</p>
 					
-					<div class="ds-share flat" data-thread-key="{{ artical.slug }}" data-title="{{ artical.title }}" data-images="/upload/user/default_user.jpg" data-content="{{ artical.summary }}" data-url="{{website_url}}{{artical.get_absolute_url}}">
+					<div class="ds-share flat" data-thread-key="{{ artical.slug }}" data-title="{{ artical.title }}" data-images="/upload/fenxiang.png" data-content="{{ artical.summary }}" data-url="{{website_url}}{{artical.get_absolute_url}}">
 					<div class="ds-share-inline">
 					<ul  class="ds-share-icons-16">
       	
@@ -63,6 +68,7 @@
 					
 					
 				</div><!-- end .entry-content -->
+				
 				
 				<!-- 多说评论框 start -->
 				<div class="ds-thread"  data-thread-key="{{ artical.slug }}" data-title="{{ artical.title }}" data-url="{{ artical.get_absolute_url }}"></div>

@@ -672,9 +672,10 @@ dl.horizontal dd {
 	}
 	
 	#main .entry-artical h2{
-		font-size:18px;
+		font-size:20px;
 		line-height:30px;
 		margin: 0 0 15px;
+		margin-top:35px;
 	}
 	
 	#main .entry-artical .entry-separator{
@@ -712,7 +713,7 @@ dl.horizontal dd {
 	
 				#main .entry-artical-header .title, #main .entry-artical-header .title a { color: #4e4d4a; font-size: 28px; line-height: 1.4em; margin-bottom:15px;}
 				
-				#main .entry-artical-header .title, #main .entry-artical-header .title a:hover{ color: #28b8ff; transition: all .3s ease-out; font-weight:300; width:600px;}
+				#main .entry-artical-header .title, #main .entry-artical-header .title a:hover{ color: #28b8ff; transition: all .3s ease-out; font-weight:300;width:755px;}
 	
 			#main .entry-artical-header .meta { margin: 0 0 0 2px;}
 	
@@ -875,7 +876,7 @@ dl.horizontal dd {
 	
 			#main .entry-artical-title-image { margin: 6px 20px 0 0; }
 	
-			#main .entry-artical-content p { margin-bottom: 10px; line-height: 1.9; letter-spacing: 0.01em; }
+			#main .entry-artical-content p { margin-bottom: 20px; line-height: 1.9; letter-spacing: 0.01em; }
 			
 			#main .entry-artical-content  code {padding: 4px;background: #272822; color: #ddd;font-family: Menlo,Monaco,Consolas,"Courier New",monospace;font-size:14px;border-radius: 4px}
 	
@@ -1936,12 +1937,13 @@ dl.horizontal dd {
 
 	/* Misc Classes */
 	.container {
-		width: 960px;
+		width: 95%;
+		margin: 0 auto;
 	}
 
 	/* Slider */
 	#slider li, #slider li img {
-		max-width: 940px;
+		max-width: 99%;
 	}
 
 	/* Forms */
@@ -1960,16 +1962,41 @@ dl.horizontal dd {
 	#search .input {width: 210px; }
 	
 	/* Main */
-	#main { width: 630px; }
+	#main { width: 100%; margin:0 auto;}
+	
+	#main .entry-artical-header .title a{
+		font-size:2.6em;
+	}
+	
+	#main .entry-artical-content p{
+		font-size:2.2em;
+	}
+	
+	#main .entry-artical-content a{
+		font-size:2.2em;
+	}
+	
+	#main .entry-artical-content h3{
+		font-size:2.4em;
+	}
+	
+	#main .entry-artical-content h4{
+		font-size:2.4em;
+	}
+	
 
 	#main .entry-image { max-width: 190px; }
 	#main .entry .entry-image { max-width: 580px; }
 
-		#main .entry-header .meta, #main .entry-header .title  { width: 470px; }
+		#main .entry-header .meta, #main .entry-header .title  { width: 100%; }
+		
+		#main .entry-header .title a  { font-size:2.3em; line-height:1.9em;}
 
 				#main .collapsible .entry-header .meta, #main .collapsible .entry-header .title { width: 365px; }
 
 		#content .author-bio h4 { width: 453px; }
+		
+		#content .box { display:none;}
 
 	/* Comments */
 	#comments .comments-list { width: 588px; }
@@ -1978,7 +2005,11 @@ dl.horizontal dd {
 				margin-left: 20px;
 				width :498px;
 			}
-
+			
+			
+	/* Siderbar */	
+							
+	
 	/* Trips Viewer */
 	#trips-viewer .tab-content { width: 628px !important; }
 

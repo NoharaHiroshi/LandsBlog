@@ -24,7 +24,7 @@ class BlogAdmin(admin.ModelAdmin):
 # —————————————————CategoryAdmin——————————————————
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('label',)}
-    list_display = ('label','slug')
+    list_display = ('label','html_title','slug')
 
 
 # —————————————————TagAdmin——————————————————
