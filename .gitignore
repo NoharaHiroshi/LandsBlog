@@ -1,0 +1,9 @@
+*.jpg
+*.png
+*.gif
+*.log
+*.pyc
+
+/Blog/upload/
+/db.sqlite3
+/db_old.sqlite3
