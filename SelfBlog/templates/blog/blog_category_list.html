@@ -33,7 +33,7 @@
 
 					<a href="{{ blog.get_absolute_url }}"><img src="{{ blog.img.url }}" width="240" height="140" alt="" class="entry-image" /></a>
 					{% get_comment_count for blog as blog_count %}
-					<p class="blog-meta">发布于 {{ blog.created|date:"m-d h:i"}} <span class="meta-span"></span>阅读 ({{ blog.read_times }}) <span class="meta-span"></span> 评论 ({{ blog_count }}) </p>
+					<p class="blog-meta">发布于 {{ blog.created|date:"m-d h:i"}} <span class="meta-span"></span>阅读 ({{ blog.read_times }}) <span class="meta-span"></span> 评论 (<span class="ds-thread-count" data-thread-key="{{ blog.slug }}" data-count-type="comments" ></span>)</p>
 					<p>{{blog.summary }}</p>
 					<div class="read-more cl-effect-14">
 							<a href={{ blog.get_absolute_url }} class="more-link">Continue reading</a>
